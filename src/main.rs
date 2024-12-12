@@ -14,14 +14,17 @@ struct CustomProps {
 }
 
 fn app() -> Element {
+    let mut count = use_signal(|| 0);
     rsx! {
         button { 
             onclick: move |event| {
-                info!("{:?}", event);
-                error!("error failed to process");
+                count += 1;
             },
             "Click Me"
          }
+         p { 
+            "Clicked: {count}"
+          }
     }
 }
 
