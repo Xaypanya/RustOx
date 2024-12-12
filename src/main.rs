@@ -14,16 +14,18 @@ struct CustomProps {
 }
 
 fn app() -> Element {
-    let mut count = use_signal(|| 0);
+    let mut email = use_signal(||String::from(""));
     rsx! {
-        button { 
-            onclick: move |event| {
-                count += 1;
-            },
-            "Click Me"
+        input { 
+            value: "{email}",
+            oninput: move |e| { email.set(e.value()); }
+         }
+         button {  
+             onclick: move |_| { email.set(String::from("")); },
+            "Reset",
          }
          p { 
-            "Clicked: {count}"
+            "Your email is: {email}"
           }
     }
 }
